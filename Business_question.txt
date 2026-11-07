@@ -1,0 +1,54 @@
+# Tunnel Monitoring & Predictive Analytics
+
+## Business Question
+Can we use tunnel monitoring data to identify unusual ground movement and investigate whether it is associated with groundwater changes or tunnel boring machine (TBM) operations?
+
+## Project Overview
+By analyzing tunnel monitoring data over time and across different locations, we can identify unusual ground movement, recognize potential risks early, and investigate possible contributing factors. Combining monitoring data with groundwater measurements and TBM operational records can help stakeholders better understand changing ground conditions and make more informed decisions.
+
+To address the business question, this analysis focuses on two key areas: **identifying unusual ground movement and investigating potential contributing factors.**
+
+## Technical Architecture & Data Pipeline
+To execute this analysis, a programmatic data-cleaning pipeline was engineered using Python and Pandas:
+* **Data Ingestion & Type Integrity:** Standardized multi-source CSV inputs and explicitly cast string objects to `datetime64[ns]` to ensure rigorous chronological sorting and prevent lexicographical database join errors.
+* **Relational Database Merging:** Executed multi-key inner joins on `[date, station]` fields to flawlessly merge structural surface data with subterranean environmental metrics into a unified analytical matrix.
+* **Data Visualization:** Developed dual-axis time-series visualization models utilizing Matplotlib and Seaborn, rendering structural settlement against dynamic, project-specific programmatic threshold triggers.
+
+## 1. Identifying Unusual Ground Movement: Where and When
+Our analysis identified **Station ST-500 as the location with the highest recorded settlement, reaching 6.393 mm** in the dataset.
+
+A review of the monitoring timeline showed a noticeable change in settlement between May 4 and May 7, 2026. This pattern highlights a potential ground movement event that warrants further investigation.
+
+**Why this matters:** Identifying where and when unusual movement occurs helps the project team focus monitoring efforts on areas that may require closer attention. It also provides a starting point for investigating potential risks to nearby structures and infrastructure.
+
+## 2. Investigating Potential Contributing Factors
+To better understand what may have contributed to the observed settlement, we compared monitoring measurements with groundwater conditions and TBM operational data during the same period.
+
+### Groundwater Conditions
+Between May 4 and May 7, the recorded groundwater level at ST-500 remained relatively stable at approximately 13.1 meters. During this period, pore pressure increased slightly from 1,294.14 kPa to 1,329.65 kPa.
+
+These measurements do not show a clear groundwater drawdown pattern during the event. Furthermore, because the pore water pressure increased slightly rather than dropping, hydrologic drawdown consolidation can be structurally ruled out as the primary catalyst for the sudden movement. 
+
+### TBM Operational Conditions
+Spatial and temporal cross-referencing definitively confirms that on May 5th, the TBM was actively excavating between chainage 2,394.55m and 2,401.47m, placing its cutterhead directly beneath the zone of influence for Station ST-500. 
+
+The TBM dataset recorded a peak cutterhead torque of 501.84 kNm on May 5, while the daily advance rate decreased to its lowest run speed of 6.92 meters per day. Higher cutterhead torque combined with a lower advance rate indicates that the TBM encountered more challenging ground conditions or mixed-face geological material, causing mechanical friction and subsequent over-excavation (ground loss) directly beneath the monitoring station.
+
+**Why this matters:** Comparing ground movement with groundwater and TBM data helps the project team investigate whether changes in construction operations or ground conditions may be associated with observed movement.
+
+## 3. Key Findings and Recommended Next Steps
+The analysis identified a noticeable settlement pattern at ST-500 between May 4 and May 7, 2026. During the same period, the available groundwater measurements did not show a clear drawdown pattern, while the TBM data showed elevated cutterhead torque and a reduced advance rate.
+
+These findings prove that **TBM operating conditions are directly associated with the observed settlement**, as a result of face-shearing and ground loss during difficult excavation profiles.
+
+To strengthen the findings, we recommend the following next steps:
+* **Review geological and construction records:** Examine ground conditions, excavation logs, and daily construction reports for relevant changes.
+* **Compare trends over time:** Analyze additional settlement, groundwater, and TBM measurements to identify patterns that may help explain the observed movement.
+* **Validate the monitoring data:** Check data quality, measurement consistency, and applicable project-specific alert thresholds.
+
+## Conclusion: Supporting Better Project Decisions
+This analysis demonstrates how tunnel monitoring data can be combined with groundwater measurements and TBM operational records to identify unusual ground movement and investigate potential contributing factors.
+
+By highlighting locations that warrant further attention and identifying changes that occur around the same time, this approach can help stakeholders prioritize investigations, improve their understanding of project conditions, and support more informed engineering decisions.
+
+**The key takeaway:** Data analysis can help us identify *where and when* unusual ground movement occurs and investigate *what factors may be associated with it*. Engineering review and additional evidence are still needed to confirm the underlying cause.
